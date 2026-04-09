@@ -224,7 +224,7 @@ const deleteDocument = async (req, res) => {
     }
 
     // Cascade delete all associated data
-    await Promise.all([
+    await Promise.allSettled([
       SmartNote.deleteMany({ documentId: id }),
       Quiz.deleteMany({ documentId: id }),
       ChatHistory.deleteMany({ documentId: id }),
@@ -233,8 +233,8 @@ const deleteDocument = async (req, res) => {
         { userId: req.user.id },
         { $pull: { quizScores: { documentId: new mongoose.Types.ObjectId(id) } } }
       ),
-      document.deleteOne(),
     ]);
+    await document.deleteOne();
 
     res.status(200).json({
       success: true,

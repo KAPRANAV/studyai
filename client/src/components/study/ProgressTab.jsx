@@ -41,11 +41,11 @@ export default function ProgressTab({ documentId }) {
   }, [documentId, fetchProgress, getHistory]);
 
   useEffect(() => {
-    if (history?.attempts) {
+    if (history?.quizzes?.length > 0) {
       setChartData(
-        history.attempts.map((a, i) => ({
+        history.quizzes.map((q, i) => ({
           name: `Attempt ${i + 1}`,
-          score: a.percentage || Math.round((a.score / a.total) * 100),
+          score: q.score && q.total ? Math.round((q.score / q.total) * 100) : 0,
         }))
       );
     }

@@ -20,7 +20,7 @@ const parseAIJson = (text) => {
 
   // Try to extract a JSON object {...}
   try {
-    const objectMatch = text.match(/\{[\s\S]*\}/);
+    const objectMatch = text.match(/\{[\s\S]*?\}(?=[^}]*$)/) || text.match(/\{[\s\S]*\}/);
     if (objectMatch) {
       return JSON.parse(objectMatch[0]);
     }
@@ -30,7 +30,7 @@ const parseAIJson = (text) => {
 
   // Try to extract a JSON array [...]
   try {
-    const arrayMatch = text.match(/\[[\s\S]*\]/);
+    const arrayMatch = text.match(/\[[\s\S]*?\](?=[^\]]*$)/) || text.match(/\[[\s\S]*\]/);
     if (arrayMatch) {
       return JSON.parse(arrayMatch[0]);
     }

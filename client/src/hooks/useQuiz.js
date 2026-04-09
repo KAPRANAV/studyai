@@ -23,8 +23,8 @@ export function useQuiz() {
   const getHistory = useCallback(async (docId) => {
     try {
       const res = await api.get(`/quiz/history/${docId}`);
-      setHistory(res.data.quiz);
-      return res.data.quiz;
+      setHistory(res.data);
+      return res.data;
     } catch (error) {
       return null;
     }

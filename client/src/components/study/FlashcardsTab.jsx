@@ -40,6 +40,8 @@ export default function FlashcardsTab({ documentId, cards, onCardsUpdate }) {
 
   const shuffleCards = () => {
     const shuffled = [...actualCards].sort(() => Math.random() - 0.5);
+    setCurrentIndex(0);
+    setIsFlipped(false);
     onCardsUpdate(shuffled);
   };
 
